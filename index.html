@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TTA Mùa 3 — Hệ thống slide</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  font-family: -apple-system, 'Segoe UI', Arial, sans-serif;
+  background: #0f1e2e;
+  background-image: radial-gradient(rgba(196,164,78,0.10) 1.3px, transparent 1.3px);
+  background-size: 30px 30px;
+  min-height: 100vh;
+  color: #fff;
+}
+
+/* Header */
+.site-header {
+  position: relative;
+  background: #1B3A5C;
+  border-bottom: 1px solid rgba(196,164,78,0.25);
+  padding: 40px 60px 36px;
+  overflow: hidden;
+}
+.site-header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(196,164,78,0.13) 1.3px, transparent 1.3px);
+  background-size: 28px 28px;
+  pointer-events: none;
+}
+.site-header::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 60%, rgba(27,58,92,0.5) 30%, transparent 70%);
+  pointer-events: none;
+}
+.header-bar-top {
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 4px;
+  background: linear-gradient(90deg, transparent 4%, #C4A44E 20%, #C4A44E 80%, transparent 96%);
+}
+.header-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.header-eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: rgba(255,255,255,0.6);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.header-title {
+  font-size: 42px;
+  font-weight: 900;
+  color: #fff;
+  line-height: 1.1;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  margin-bottom: 6px;
+}
+.header-title span { color: #D4B46E; }
+.header-sub {
+  font-size: 16px;
+  color: rgba(255,255,255,0.65);
+  font-style: italic;
+  font-weight: 500;
+  margin-top: 10px;
+}
+.gold-rule {
+  width: 60px; height: 2px;
+  background: #C4A44E;
+  margin: 16px 0;
+}
+
+/* Main */
+.main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 48px 60px 80px;
+}
+
+/* Season block */
+.season {
+  margin-bottom: 56px;
+}
+.season-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 28px;
+}
+.season-num {
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 3px;
+  color: #C4A44E;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.season-title {
+  font-size: 22px;
+  font-weight: 900;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.season-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(196,164,78,0.4), transparent);
+}
+.season-count {
+  font-size: 12px;
+  color: rgba(255,255,255,0.35);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* Session grid */
+.sessions {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+/* Session card */
+.session-card {
+  position: relative;
+  background: rgba(27,58,92,0.45);
+  border: 1.5px solid rgba(196,164,78,0.18);
+  border-top: 3px solid rgba(196,164,78,0.5);
+  border-radius: 14px;
+  padding: 26px 24px 22px;
+  text-decoration: none;
+  display: block;
+  transition: all 0.2s ease;
+  overflow: hidden;
+}
+.session-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(196,164,78,0.07) 1.2px, transparent 1.2px);
+  background-size: 20px 20px;
+  border-radius: 12px;
+  pointer-events: none;
+}
+.session-card:hover {
+  border-color: rgba(196,164,78,0.55);
+  border-top-color: #C4A44E;
+  background: rgba(27,58,92,0.7);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 36px rgba(0,0,0,0.3), 0 0 0 1px rgba(196,164,78,0.15);
+}
+.session-card.practice {
+  border-top-color: rgba(196,164,78,0.3);
+  background: rgba(20,40,65,0.5);
+}
+.session-card.practice::after {
+  content: 'THỰC CHIẾN';
+  position: absolute;
+  top: 14px; right: 14px;
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  color: #C4A44E;
+  background: rgba(196,164,78,0.12);
+  border: 1px solid rgba(196,164,78,0.25);
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+.session-card.final {
+  border-top-color: #C4A44E;
+  background: rgba(196,164,78,0.08);
+  border-color: rgba(196,164,78,0.35);
+}
+.session-card.unavailable {
+  opacity: 0.45;
+  cursor: default;
+  pointer-events: none;
+}
+
+.card-num {
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 2.5px;
+  color: rgba(196,164,78,0.75);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  position: relative;
+  z-index: 1;
+}
+.card-title {
+  font-size: 16px;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.4;
+  text-transform: uppercase;
+  letter-spacing: 0.2px;
+  margin-bottom: 10px;
+  position: relative;
+  z-index: 1;
+}
+.card-title span { color: #D4B46E; }
+.card-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+  z-index: 1;
+}
+.card-tag {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: rgba(255,255,255,0.4);
+  text-transform: uppercase;
+}
+.card-dot {
+  width: 3px; height: 3px;
+  border-radius: 50%;
+  background: rgba(196,164,78,0.4);
+}
+.card-week {
+  font-size: 10px;
+  font-weight: 600;
+  color: rgba(196,164,78,0.55);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* Big ghost number */
+.ghost-num {
+  position: absolute;
+  bottom: -8px; right: 10px;
+  font-size: 88px;
+  font-weight: 900;
+  color: rgba(196,164,78,0.07);
+  line-height: 1;
+  pointer-events: none;
+  letter-spacing: -4px;
+}
+
+/* Card description & footer */
+.card-desc {
+  font-size: 13.5px;
+  color: rgba(255,255,255,0.52);
+  line-height: 1.65;
+  margin-bottom: 16px;
+  font-weight: 400;
+  position: relative;
+  z-index: 1;
+}
+.card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  z-index: 1;
+  border-top: 1px solid rgba(196,164,78,0.12);
+  padding-top: 11px;
+  margin-top: 4px;
+}
+.card-stats {
+  font-size: 12px;
+  color: rgba(255,255,255,0.32);
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+.card-arrow {
+  font-size: 17px;
+  color: #C4A44E;
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: all 0.2s ease;
+}
+.session-card:hover .card-arrow { opacity: 1; transform: translateX(0); }
+
+/* Footer */
+.site-footer {
+  border-top: 1px solid rgba(196,164,78,0.15);
+  padding: 20px 60px;
+  text-align: center;
+  font-size: 11px;
+  letter-spacing: 2.5px;
+  color: rgba(196,164,78,0.5);
+  text-transform: uppercase;
+  font-variant: small-caps;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .site-header { padding: 30px 24px 26px; }
+  .main { padding: 32px 24px 60px; }
+  .sessions { grid-template-columns: 1fr 1fr; gap: 14px; }
+  .header-title { font-size: 28px; }
+  .site-footer { padding: 16px 24px; }
+}
+@media (max-width: 580px) {
+  .sessions { grid-template-columns: 1fr; }
+  .season-title { font-size: 17px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="site-header">
+  <div class="header-bar-top"></div>
+  <div class="header-inner">
+    <div class="header-eyebrow">The Trusted Advisor · Mùa 3 · Hệ thống slide</div>
+    <div class="header-title">Bán hàng<br><span>bằng vị thế</span></div>
+    <div class="gold-rule"></div>
+    <div class="header-sub">Phương pháp dẫn quyết định 3 Điểm Chạm · Coach Duy Nguyễn</div>
+  </div>
+</header>
+
+<!-- Main -->
+<main class="main">
+
+  <!-- Tuần 1 -->
+  <section class="season">
+    <div class="season-header">
+      <div class="season-num">Tuần 01</div>
+      <div class="season-title">Kết nối và Thiết lập</div>
+      <div class="season-line"></div>
+      <div class="season-count">2 buổi</div>
+    </div>
+    <div class="sessions">
+
+      <a href="buoi-01.html" class="session-card">
+        <div class="ghost-num">01</div>
+        <div class="card-num">Buổi 01</div>
+        <div class="card-title">Định vị<br><span>Chân dung cố vấn</span><br>tin cậy</div>
+        <div class="card-desc">Kỹ thuật tốt nhất cũng vô dụng nếu khách không tin người đứng trước họ. Vị thế không phải bẩm sinh. Vị thế xây được.</div>
+        <div class="card-footer">
+          <div class="card-stats">120 phút · TL1</div>
+          <div class="card-arrow">→</div>
+        </div>
+      </a>
+
+      <a href="buoi-02.html" class="session-card">
+        <div class="ghost-num">02</div>
+        <div class="card-num">Buổi 02</div>
+        <div class="card-title">Thấu hiểu<br><span>tâm lý khách hàng</span><br>cao cấp</div>
+        <div class="card-desc">Khách nói "để suy nghĩ thêm" không phải vì chưa đủ thông tin. Họ đang bị thứ khác giữ lại. Buổi này giúp bạn đọc được thứ đó.</div>
+        <div class="card-footer">
+          <div class="card-stats">150 phút · TL2</div>
+          <div class="card-arrow">→</div>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- Tuần 2 -->
+  <section class="season">
+    <div class="season-header">
+      <div class="season-num">Tuần 02</div>
+      <div class="season-title">Chạm Động Lực</div>
+      <div class="season-line"></div>
+      <div class="season-count">2 buổi</div>
+    </div>
+    <div class="sessions">
+
+      <a href="buoi-03/index.html" class="session-card unavailable">
+        <div class="ghost-num">03</div>
+        <div class="card-num">Buổi 03</div>
+        <div class="card-title">Thiết lập vị thế<br>và<br><span>Chạm động lực</span></div>
+        <div class="card-desc">Khách chưa mua không phải vì chưa đủ tiền. Họ chưa thấy đủ lý do. Buổi này dạy cách khơi đúng ngọn lửa bên trong khách.</div>
+        <div class="card-footer">
+          <div class="card-stats">120 phút · TL1 · TL3</div>
+          <div class="card-arrow">→</div>
+        </div>
+      </a>
+
+      <a href="buoi-04/index.html" class="session-card practice unavailable">
+        <div class="ghost-num">04</div>
+        <div class="card-num">Buổi 04</div>
+        <div class="card-title"><span>Thực chiến</span><br>Chạm động lực<br>B2B và B2C</div>
+        <div class="card-desc">Biết lý thuyết mà không luyện là chưa có kỹ năng. Buổi thực chiến này rèn phản xạ trực tiếp trên tình huống thật.</div>
+        <div class="card-footer">
+          <div class="card-stats">120 phút · Thực hành</div>
+          <div class="card-arrow">→</div>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- Tuần 3 -->
+  <section class="season">
+    <div class="season-header">
+      <div class="season-num">Tuần 03</div>
+      <div class="season-title">Chạm Điểm Nghẽn</div>
+      <div class="season-line"></div>
+      <div class="season-count">2 buổi</div>
+    </div>
+    <div class="sessions">
+
+      <a href="buoi-05/index.html" class="session-card unavailable">
+        <div class="ghost-num">05</div>
+        <div class="card-num">Buổi 05</div>
+        <div class="card-title">Chạm đúng<br><span>điểm nghẽn</span><br>và cái giá của sự trì hoãn</div>
+        <div class="card-desc">Khách không sợ thay đổi. Họ sợ cái giá nếu thay đổi sai. Buổi này giúp bạn dẫn họ tự nhìn thấy cái giá của việc đứng yên.</div>
+        <div class="card-footer">
+          <div class="card-stats">120 phút · TL3 · TL4</div>
+          <div class="card-arrow">→</div>
+        </div>
+      </a>
+
+      <a href="buoi-06/index.html" class="session-card practice unavailable">
+        <div class="ghost-num">06</div>
+        <div class="card-num">Buổi 06</div>
+        <div class="card-title"><span>Thực chiến</span><br>Chạm điểm nghẽn<br>B2B và B2C</div>
+        <div class="card-desc">Chạm điểm nghẽn sai là đẩy khách ra xa. Buổi này rèn cách chạm đúng, đủ sâu, không áp lực.</div>
+        <div class="card-footer">
+          <div class="card-stats">120 phút · Thực hành</div>
+          <div class="card-arrow">→</div>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- Tuần 4 -->
+  <section class="season">
+    <div class="season-header">
+      <div class="season-num">Tuần 04</div>
+      <div class="season-title">Chạm Con Đường và Gỡ Rối</div>
+      <div class="season-line"></div>
+      <div class="season-count">3 buổi</div>
+    </div>
+    <div class="sessions">
+
+      <a href="buoi-07/index.html" class="session-card unavailable">
+        <div class="ghost-num">07</div>
+        <div class="card-num">Buổi 07</div>
+        <div class="card-title">Dẫn dắt quyết định<br><span>bằng con đường</span></div>
+        <div class="card-desc">Trình bày giải pháp quá sớm là tự phá vị thế. Buổi này dạy cách đặt con đường trước mắt khách để họ tự bước vào.</div>
+        <div class="card-footer">
+          <div class="card-stats">120 phút · TL3</div>
+          <div class="card-arrow">→</div>
+        </div>
+      </a>
+
+      <a href="buoi-08/index.html" class="session-card unavailable">
+        <div class="ghost-num">08</div>
+        <div class="card-num">Buổi 08</div>
+        <div class="card-title">Gỡ rối và chốt<br><span>bằng REFLECT</span></div>
+        <div class="card-desc">Băn khoăn của khách không cần phản bác. Cần được phản chiếu đúng. Buổi này biến từ chối thành cơ hội đi sâu hơn.</div>
+        <div class="card-footer">
+          <div class="card-stats">120 phút · TL5</div>
+          <div class="card-arrow">→</div>
+        </div>
+      </a>
+
+      <a href="buoi-09/index.html" class="session-card final unavailable">
+        <div class="ghost-num">09</div>
+        <div class="card-num">Buổi 09</div>
+        <div class="card-title">Quy trình hoàn chỉnh<br><span>Bán hàng bằng vị thế</span></div>
+        <div class="card-desc">Không phải tổng kết lý thuyết. Đây là buổi bạn chạy toàn bộ quy trình như một cố vấn thật sự.</div>
+        <div class="card-footer">
+          <div class="card-stats">120 phút · Tổng kết</div>
+          <div class="card-arrow">→</div>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  The Trusted Advisor · Mùa 3 · Coach Duy Nguyễn · Lưu hành nội bộ
+</footer>
+
+</body>
+</html>
