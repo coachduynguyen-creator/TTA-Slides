@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>B7 · Dẫn Dắt Quyết Định Bằng Con Đường · TTA Mùa 3</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:-apple-system,'Segoe UI',Arial,sans-serif;overflow:hidden;width:100vw;height:100vh;}
+.slide{display:none;width:100vw;height:100vh;position:relative;overflow:hidden;padding-bottom:36px;flex-direction:column;justify-content:center;align-items:center;}
+.slide.active{display:flex;}
+.bg-cover,.bg-closing,.bg-challenge{background-color:#1B3A5C;background-image:radial-gradient(rgba(196,164,78,0.18) 1.3px,transparent 1.3px);background-size:30px 30px;}
+.bg-cover::before,.bg-closing::before,.bg-challenge::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(27,58,92,0.55) 25%,transparent 65%);pointer-events:none;z-index:1;}
+.bg-agenda{background-color:#2e1c06;background-image:radial-gradient(rgba(196,164,78,0.20) 1.3px,transparent 1.3px);background-size:30px 30px;}
+.bg-agenda::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(46,28,6,0.5) 25%,transparent 65%);pointer-events:none;z-index:1;}
+.bg-section{background-color:#f0e4c8;background-image:linear-gradient(rgba(168,128,32,0.14) 1px,transparent 1px),linear-gradient(90deg,rgba(168,128,32,0.14) 1px,transparent 1px);background-size:40px 40px;}
+.bg-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,#f0e4c8 30%,transparent 65%);pointer-events:none;z-index:1;}
+.bg-content{background:#ffffff;background-image:radial-gradient(rgba(168,128,32,0.22) 1.5px,transparent 1.5px);background-size:28px 28px;}
+.bg-content::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,#ffffff 30%,transparent 65%);pointer-events:none;z-index:1;}
+.bg-practice{background:#fffbf2;background-image:radial-gradient(rgba(168,128,32,0.18) 1.4px,transparent 1.4px);background-size:28px 28px;}
+.bg-practice::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,#fffbf2 32%,transparent 66%);pointer-events:none;z-index:1;}
+.border-practice{position:absolute;inset:0;border:2px solid rgba(196,164,78,0.4);pointer-events:none;z-index:5;}
+.bg-game{background-color:#0f2440;background-image:radial-gradient(rgba(196,164,78,0.15) 1.3px,transparent 1.3px);background-size:28px 28px;}
+.bg-game::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(15,36,64,0.6) 25%,transparent 65%);pointer-events:none;z-index:1;}
+.bg-selflearn{background-color:#0d1f35;background-image:radial-gradient(rgba(196,164,78,0.12) 1.3px,transparent 1.3px);background-size:28px 28px;}
+.bg-selflearn::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(13,31,53,0.55) 25%,transparent 65%);pointer-events:none;z-index:1;}
+.bar-top{position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,transparent 6%,#C4A44E 24%,#C4A44E 76%,transparent 94%);z-index:5;}
+.bar-left{position:absolute;left:0;top:0;bottom:0;width:5px;background:linear-gradient(180deg,transparent 5%,#C4A44E 22%,#C4A44E 78%,transparent 95%);z-index:5;}
+.bar-right{position:absolute;right:0;top:0;bottom:0;width:5px;background:linear-gradient(180deg,transparent 5%,rgba(196,164,78,0.3) 22%,rgba(196,164,78,0.3) 78%,transparent 95%);z-index:5;}
+.footer-dark{position:absolute;bottom:0;left:0;right:0;height:36px;display:flex;align-items:center;justify-content:center;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#C4A44E;background:rgba(0,0,0,0.3);border-top:1px solid rgba(196,164,78,0.2);z-index:10;}
+.footer-light{position:absolute;bottom:0;left:0;right:0;height:36px;display:flex;align-items:center;justify-content:center;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#8a6010;background:rgba(255,255,255,0.92);border-top:1px solid rgba(168,128,32,0.2);z-index:10;}
+.footer-parchment{position:absolute;bottom:0;left:0;right:0;height:36px;display:flex;align-items:center;justify-content:center;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#8a6010;background:rgba(240,228,200,0.92);border-top:1px solid rgba(168,128,32,0.2);z-index:10;}
+.nav{position:fixed;bottom:44px;right:24px;display:flex;align-items:center;gap:10px;z-index:200;}
+.nav-counter{font-size:12px;color:#aaa;}
+.nav-btn{background:rgba(168,128,32,0.08);border:1px solid rgba(168,128,32,0.28);color:#8a6010;padding:6px 14px;border-radius:6px;font-size:13px;cursor:pointer;transition:.18s;}
+.nav-btn:hover{background:rgba(168,128,32,0.17);}
+.content{position:relative;z-index:3;width:100%;max-width:1160px;padding:0 48px;}
+.card{background:#ffffff;border:1.5px solid rgba(168,128,32,0.2);border-top:3px solid #9a7218;border-radius:14px;padding:28px 24px 22px;box-shadow:0 4px 22px rgba(0,0,0,0.09),0 1px 4px rgba(0,0,0,0.06);position:relative;overflow:hidden;}
+.card-dark{background:rgba(255,255,255,0.06);border:1.5px solid rgba(196,164,78,0.25);border-top:3px solid #C4A44E;border-radius:14px;padding:28px 24px 22px;position:relative;overflow:hidden;}
+.cnum{position:absolute;bottom:-4px;right:12px;font-size:80px;font-weight:900;color:rgba(168,128,32,0.07);line-height:1;pointer-events:none;}
+.cl{font-size:12px;letter-spacing:2.5px;color:#8a6010;text-transform:uppercase;font-weight:900;margin-bottom:9px;}
+.cl-d{font-size:12px;letter-spacing:2.5px;color:#C4A44E;text-transform:uppercase;font-weight:900;margin-bottom:9px;}
+.ct{font-size:19px;font-weight:900;color:#0d0d0d;margin-bottom:8px;line-height:1.3;text-transform:uppercase;}
+.ct-d{font-size:19px;font-weight:900;color:#ffffff;margin-bottom:8px;line-height:1.3;text-transform:uppercase;}
+.cb{font-size:16px;color:#2a2a2a;line-height:1.65;font-weight:500;}
+.cb-d{font-size:16px;color:rgba(255,255,255,0.82);line-height:1.65;font-weight:500;}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px;}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:22px;}
+.slide-title{font-size:26px;font-weight:900;text-transform:uppercase;color:#5a3a06;text-align:center;letter-spacing:1px;margin-bottom:24px;}
+.slide-title-d{font-size:26px;font-weight:900;text-transform:uppercase;color:rgba(255,255,255,0.9);text-align:center;letter-spacing:1px;margin-bottom:24px;}
+.eyebrow{font-size:13px;font-weight:900;letter-spacing:3px;text-transform:uppercase;color:#8a6010;margin-bottom:18px;}
+.eyebrow-d{font-size:13px;font-weight:900;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.7);margin-bottom:20px;}
+.gold-line{width:60px;height:2px;background:#C4A44E;margin:0 auto;}
+.flow{display:flex;flex-direction:column;gap:10px;}
+.frow{display:flex;align-items:flex-start;gap:16px;background:#fff;border:1.5px solid rgba(168,128,32,0.18);border-radius:12px;padding:14px 18px;box-shadow:0 2px 10px rgba(0,0,0,0.06);}
+.fnum{font-size:16px;font-weight:900;color:#C4A44E;width:34px;height:34px;border-radius:8px;background:rgba(196,164,78,0.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.ftxt{font-size:17px;font-weight:600;color:#0d0d0d;line-height:1.55;padding-top:2px;}
+.fnote{font-size:14px;color:#777;margin-top:4px;font-weight:400;}
+.badge-p{display:inline-flex;align-items:center;background:#6a3e06;color:#fff;font-size:12px;font-weight:900;letter-spacing:2.5px;text-transform:uppercase;padding:8px 20px;border-radius:6px;box-shadow:0 3px 12px rgba(106,62,6,0.35);}
+.badge-t{display:inline-flex;align-items:center;font-size:14px;font-weight:800;color:#6a3e06;border:1.5px solid rgba(106,62,6,0.3);padding:5px 14px;border-radius:8px;background:rgba(168,128,32,0.08);margin-left:10px;}
+.steps{background:#fff;border-radius:12px;border:1.5px solid rgba(168,128,32,0.18);box-shadow:0 2px 14px rgba(0,0,0,0.08);overflow:hidden;}
+.srow{display:flex;gap:16px;align-items:flex-start;padding:14px 20px;border-bottom:1px solid rgba(168,128,32,0.12);}
+.srow:last-child{border-bottom:none;}
+.snum{width:30px;height:30px;border-radius:50%;background:#7a5008;color:#fff;font-weight:900;font-size:14px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+.stxt{font-size:17px;color:#111;line-height:1.6;font-weight:600;padding-top:2px;}
+.snote{font-size:14px;color:#666;font-style:italic;margin-top:4px;}
+.pcap{font-size:19px;font-weight:700;color:#4a3008;font-style:italic;margin-top:14px;}
+.trow{display:flex;align-items:flex-start;gap:18px;background:rgba(255,255,255,0.07);border:1.5px solid rgba(196,164,78,0.22);border-radius:12px;padding:16px 20px;margin-bottom:10px;box-shadow:0 4px 16px rgba(0,0,0,0.12);}
+.tnum{font-size:30px;font-weight:900;color:#C4A44E;min-width:34px;line-height:1.1;flex-shrink:0;}
+.ttxt{font-size:19px;font-weight:700;color:#ffffff;line-height:1.5;}
+.tgold{color:#D4B46E;}
+.dtbl{width:100%;border-collapse:collapse;}
+.dtbl th{background:rgba(168,128,32,0.12);color:#5a3a06;font-size:13px;font-weight:900;letter-spacing:2px;text-transform:uppercase;padding:11px 14px;text-align:left;}
+.dtbl td{font-size:16px;color:#1a1a1a;padding:13px 16px;border-bottom:1px solid rgba(168,128,32,0.08);background:#fff;font-weight:500;line-height:1.5;}
+.dtbl tr:last-child td{border-bottom:none;}
+.dtbl tr.hl td{background:#fff8e0;font-weight:700;color:#5a3006;}
+.script-box{background:rgba(196,164,78,0.08);border-left:5px solid #C4A44E;border-radius:0 10px 10px 0;padding:14px 20px;margin-top:12px;}
+.script-box p{font-size:16px;color:#2a2a2a;line-height:1.75;font-style:italic;}
+.script-label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#8a6010;font-weight:900;margin-bottom:6px;}
+.annot{display:inline-block;font-size:11px;font-weight:900;letter-spacing:1.5px;text-transform:uppercase;padding:3px 10px;border-radius:20px;margin-bottom:4px;}
+.annot-1{background:rgba(196,164,78,0.2);color:#7a5008;}
+.annot-2{background:rgba(27,58,92,0.12);color:#1B3A5C;}
+.annot-3{background:rgba(106,62,6,0.12);color:#6a3e06;}
+.annot-4{background:rgba(0,120,80,0.12);color:#006040;}
+.err-row{display:flex;align-items:flex-start;gap:14px;padding:12px 18px;border-radius:10px;margin-bottom:8px;}
+.err-icon{font-size:20px;flex-shrink:0;margin-top:2px;}
+.err-label{font-size:12px;font-weight:900;letter-spacing:2px;text-transform:uppercase;margin-bottom:4px;}
+.err-bad{background:rgba(200,40,40,0.08);border-left:4px solid #c82828;}
+.err-txt{font-size:16px;color:#1a1a1a;line-height:1.55;font-weight:500;}
+.selflearn-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(196,164,78,0.15);border:1px solid rgba(196,164,78,0.35);border-radius:20px;padding:5px 16px;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#D4B46E;margin-bottom:18px;}
+.step-badge{display:flex;align-items:center;gap:14px;margin-bottom:20px;}
+.step-num{width:44px;height:44px;border-radius:12px;background:#1B3A5C;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:900;color:#C4A44E;flex-shrink:0;}
+.step-name{font-size:28px;font-weight:900;color:#1B3A5C;text-transform:uppercase;letter-spacing:1px;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes scaleIn{from{opacity:0;transform:scale(0.88)}to{opacity:1;transform:scale(1)}}
+@keyframes slideR{from{opacity:0;transform:translateX(-24px)}to{opacity:1;transform:translateX(0)}}
+@keyframes slideL{from{opacity:0;transform:translateX(24px)}to{opacity:1;transform:translateX(0)}}
+@keyframes glowBreath{0%,100%{box-shadow:0 0 10px 2px rgba(196,164,78,0.28),0 6px 24px rgba(27,58,92,0.25)}50%{box-shadow:0 0 32px 10px rgba(196,164,78,0.62),0 8px 36px rgba(27,58,92,0.42)}}
+.a1{animation:fadeUp .45s .1s ease both;opacity:0;}
+.a2{animation:fadeUp .45s .25s ease both;opacity:0;}
+.a3{animation:fadeUp .45s .4s ease both;opacity:0;}
+.a4{animation:fadeUp .45s .55s ease both;opacity:0;}
+.a5{animation:fadeUp .45s .7s ease both;opacity:0;}
+.aL{animation:slideL .5s .2s ease both;opacity:0;}
+.aR{animation:slideR .5s .1s ease both;opacity:0;}
+.aS{animation:scaleIn .5s .1s ease both;opacity:0;}
+</style>
+</head>
+<body>
+<canvas id="pcv" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;"></canvas>
+
+<!-- S1: COVER -->
+<div class="slide active bg-cover" id="s1">
+  <div class="bar-top"></div><div class="bar-left"></div><div class="bar-right"></div>
+  <div class="content" style="text-align:center;max-width:900px;position:relative;z-index:3;">
+    <div class="gold-line a1" style="margin-bottom:26px;"></div>
+    <div class="a2" style="font-size:13px;font-weight:700;letter-spacing:3px;color:rgba(255,255,255,0.65);text-transform:uppercase;margin-bottom:18px;">Buổi 07 · TTA Mùa 3 · 120 Phút</div>
+    <div class="a3" style="font-size:58px;font-weight:900;color:#ffffff;line-height:1.08;text-transform:uppercase;letter-spacing:-1px;">Dẫn Dắt Quyết Định<br><span style="color:#D4B46E;">Bằng Con Đường</span></div>
+    <div class="a4" style="width:90px;height:2px;background:linear-gradient(90deg,transparent,#C4A44E,transparent);margin:26px auto;"></div>
+    <div class="a5" style="font-size:22px;color:rgba(255,255,255,0.72);font-style:italic;font-weight:500;line-height:1.65;">Con đường không do bạn vẽ. Con đường được xây từ ngôn ngữ của khách.</div>
+    <div class="gold-line a5" style="margin-top:26px;"></div>
+  </div>
+  <div class="footer-dark">THE TRUSTED ADVISOR | COACH DUY NGUYEN</div>
+</div>
+
+<!-- S2: AGENDA -->
+<div class="slide bg-agenda" id="s2">
+  <div class="bar-top"></div><div class="bar-left"></div><div class="bar-right"></div>
+  <div class="content" style="position:relative;z-index:3;">
+    <div class="a1 slide-title-d" style="margin-bottom:28px;">Nội Dung Buổi Học</div>
+    <div class="g3 a2">
+      <div class="card-dark">
+        <div class="cl-d">Phần 01 · 25 phút</div>
+        <div class="ct-d">Chạm Con Đường Là Gì</div>
+        <div class="cb-d">Phân biệt "bán giải pháp" và "dẫn con đường" qua ngôn ngữ cụ thể.</div>
+      </div>
+      <div class="card-dark">
+        <div class="cl-d">Phần 02 · 45 phút</div>
+        <div class="ct-d">Công Thức 4 Bước</div>
+        <div class="cb-d">Nhắc lại, Nguyên tắc, Lộ trình, Đánh giá mức độ sẵn sàng. Mỗi bước có ngôn ngữ mẫu và ví dụ thực.</div>
+      </div>
+      <div class="card-dark">
+        <div class="cl-d">Phần 03 · 35 phút</div>
+        <div class="ct-d">Thực Chiến</div>
+        <div class="cb-d">Xây bài Chạm Con Đường cho sản phẩm của mình. Roleplay và chữa bài trên lớp.</div>
+      </div>
+    </div>
+    <div class="a3" style="margin-top:20px;padding:14px 22px;background:rgba(196,164,78,0.1);border:1px solid rgba(196,164,78,0.25);border-radius:10px;display:flex;align-items:center;gap:16px;">
+      <div style="font-size:13px;font-weight:700;color:#C4A44E;letter-spacing:2px;text-transform:uppercase;flex-shrink:0;">Sau buổi này</div>
+      <div style="font-size:16px;color:rgba(255,255,255,0.78);">Học viên viết được bài Chạm Con Đường 4 bước cho khách hàng thực, nghe như đang tư vấn chứ không như đang bán hàng.</div>
+    </div>
+  </div>
+  <div class="footer-dark">THE TRUSTED ADVISOR | COACH DUY NGUYEN</div>
+</div>
+
+<!-- S3: SECTION OPENER 1 -->
+<div class="slide bg-section" id="s3">
+  <div class="bar-top"></div><div class="bar-left"></div><div class="bar-right"></div>
+  <div class="content" style="position:relative;z-index:3;">
+    <div class="a1" style="font-size:12px;font-weight:700;letter-spacing:3px;color:#8a6010;text-transform:uppercase;margin-bottom:16px;">Phần 01 · TTA Mùa 3 · 25 phút</div>
+    <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:32px;">
+      <div class="a2" style="font-size:80px;font-weight:900;color:#0d0d0d;line-height:0.95;text-transform:uppercase;letter-spacing:-3px;">Chạm<br><span style="color:#8a6010;">Con</span><br>Đường</div>
+      <div class="a2" style="font-size:260px;font-weight:900;line-height:0.82;color:rgba(168,128,32,0.18);pointer-events:none;letter-spacing:-14px;flex-shrink:0;margin-top:-12px;">01</div>
+    </div>
+    <div class="a3" style="width:100%;height:2px;background:linear-gradient(90deg,#9a7218,rgba(168,128,32,0.08));margin:22px 0 18px;"></div>
+    <div class="a4" style="font-size:24px;font-style:italic;font-weight:500;color:#3a3a3a;line-height:1.55;">Là gì và không phải là gì. Trước khi học cách làm, cần hiểu đúng bản chất.</div>
+  </div>
+  <div class="footer-parchment">THE TRUSTED ADVISOR | COACH DUY NGUYEN</div>
+</div>
+
+<!-- S4: MINI-GAME -->
+<div class="slide bg-game" id="s4">
+  <div class="bar-top"></div><div class="bar-left"></div><div class="bar-right"></div>
+  <div class="content" style="position:relative;z-index:3;">
+    <div class="a1 eyebrow-d" style="text-align:center;">Câu Hỏi Khởi Động</div>
+    <div class="a2" style="font-size:30px;font-weight:900;color:#ffffff;text-align:center;margin-bottom:28px;line-height:1.3;">Nghe hai đoạn này. Cái nào khiến bạn<br><span style="color:#D4B46E;">muốn hành động hơn?</span></div>
+    <div class="g2 a3">
+      <div class="card-dark" style="border-top-color:rgba(196,164,78,0.35);">
+        <div class="cl-d" style="color:rgba(255,255,255,0.45);">Đoạn A</div>
+        <div class="cb-d" style="font-style:italic;font-size:17px;line-height:1.8;">"Chương trình gồm 8 buổi, mỗi buổi 2 tiếng, học online. Nội dung bao gồm kỹ năng tư vấn, xử lý từ chối và chốt sales. Học viên nhận tài liệu và quyền truy cập nhóm hỗ trợ sau khi đăng ký."</div>
+      </div>
+      <div class="card-dark" style="border-top-color:#C4A44E;">
+        <div class="cl-d">Đoạn B</div>
+        <div class="cb-d" style="font-style:italic;font-size:17px;line-height:1.8;">"Qua những gì anh kể, em hiểu là anh đang bị mất khách ở giai đoạn trình bày, và mỗi lần như vậy anh cảm thấy mình đang bán chứ không phải đang tư vấn. Cái anh cần không phải thêm kỹ thuật, mà là cách để khách tự thấy mình muốn gì trước khi mình nói về sản phẩm. Đi theo hướng đó, mỗi tuần anh sẽ thấy khách phản hồi khác đi một cách rõ rệt."</div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-dark">THE TRUSTED ADVISOR | COACH DUY NGUYEN</div>
+</div>
+
+<!-- S5: ĐÁP ÁN MINI-GAME -->
+<div class="slide bg-content" id="s5">
+  <div class="bar-top"></div><div class="bar-left"></div><div class="bar-right"></div>
+  <div class="content" style="position:relative;z-index:3;">
+    <div class="a1 slide-title">Tại Sao Đoạn B Hiệu Quả Hơn?</div>
+    <div class="g3 a2">
+      <div class="card">
+        <div class="cl">Dùng từ của khách</div>
+        <div class="ct">Không tự đặt từ</div>
+        <div class="cb">"bị mất khách ở giai đoạn trình bày", "đang bán chứ không tư vấn" là đúng những gì khách vừa nói, không phải từ người bán tự thêm vào.</div>
+        <div class="cnum">1</div>
+      </div>
+      <div class="card">
+        <div class="cl">Không nói tính năng</div>
+        <div class="ct">Không có "8 buổi, 2 tiếng"</div>
+        <div class="cb">Đoạn B không nhắc cấu trúc sản phẩm. Nó nói về điều thay đổi xảy ra với khách, không phải sản phẩm có gì bên trong.</div>
+        <div class="cnum">2</div>
+      </div>
+      <div class="card">
+        <div class="cl">Kết quả theo giai đoạn</div>
+        <div class="ct">Gắn đúng điểm nghẽn</div>
+        <div class="cb">"Mỗi tuần anh thấy khách phản hồi khác đi" trả lời trực tiếp điểm nghẽn anh đang gặp, không phải lợi ích chung chung.</div>
+        <div class="cnum">3</div>
+      </div>
+    </div>
+    <div class="a3" style="margin-top:18px;padding:14px 22px;background:rgba(196,164,78,0.08);border-left:5px solid #C4A44E;border-radius:0 10px 10px 0;">
+      <div style="font-size:18px;font-weight:700;color:#3a2408;font-style:italic;">Đoạn A bán sản phẩm. Đoạn B xây con đường từ ngôn ngữ của khách.</div>
+    </div>
+  </div>
+  <div class="footer-light">THE TRUSTED ADVISOR | COACH DUY NGUYEN</div>
+</div>
+
+<!-- S6: 2 CHIỀU TRÌNH BÀY -->
+<div class="slide bg-content" id="s6">
+  <div class="bar-top"></div><div class="bar-left"></div><div class="bar-right"></div>
+  <div class="content" style="position:relative;z-index:3;">
+    <div class="a1 slide-title">Hai Chiều Trình Bày</div>
+    <div class="g2 a2" style="gap:30px;">
+      <div style="border:2px solid rgba(200,40,40,0.25);border-radius:14px;padding:24px;background:rgba(200,40,40,0.04);">
+        <div style="font-size:13px;font-weight:900;letter-spacing:2px;text-transform:uppercase;color:#c82828;margin-bottom:16px;">Bán Giải Pháp (từ trong ra)</div>
+        <div class="flow">
+          <div class="frow" style="border-color:rgba(200,40,40,0.2);">
+            <div class="fnum" style="background:rgba(200,40,40,0.1);color:#c82828;">1</div>
+            <div class="ftxt">Bắt đầu từ sản phẩm của mình</div>
+          </div>
+          <div class="frow" style="border-color:rgba(200,40,40,0.2);">
+            <div class="fnum" style="background:rgba(200,40,40,0.1);color:#c82828;">2</div>
+            <div class="ftxt">Nói tính năng và lợi ích</div>
+          </div>
+          <div class="frow" style="border-color:rgba(200,40,40,0.2);">
+            <div class="fnum" style="background:rgba(200,40,40,0.1);color:#c82828;">3</div>
+            <div class="ftxt">Liệt kê ưu điểm so với đối thủ</div>
+          </div>
+          <div class="frow" style="border-color:rgba(200,40,40,0.2);background:rgba(200,40,40,0.06);">
+            <div class="fnum" style="background:rgba(200,40,40,0.15);color:#c82828;">!</div>
+            <div class="ftxt" style="color:#c82828;font-weight:700;">Khách: "Để tôi suy nghĩ thêm."</div>
+          </div>
+        </div>
+      </div>
+      <div style="border:2px solid rgba(0,130,70,0.3);border-radius:14px;padding:24px;background:rgba(0,130,70,0.04);">
+        <div style="font-size:13px;font-weight:900;letter-spacing:2px;text-transform:uppercase;color:#006040;margin-bottom:16px;">Dẫn Con Đường (từ ngoài vào)</div>
+        <div class="flow">
+          <div class="frow" style="border-color:rgba(0,130,70,0.2);">
+            <div class="fnum" style="background:rgba(0,130,70,0.1);color:#006040;">1</div>
+            <div class="ftxt">Bắt đầu từ ngôn ngữ của khách</div>
+          </div>
+          <div class="frow" style="border-color:rgba(0,130,70,0.2);">
+            <div class="fnum" style="background:rgba(0,130,70,0.1);color:#006040;">2</div>
+            <div class="ftxt">Nêu cách tiếp cận phù hợp</div>
+          </div>
+          <div class="frow" style="border-color:rgba(0,130,70,0.2);">
+            <div class="fnum" style="background:rgba(0,130,70,0.1);color:#006040;">3</div>
+            <div class="ftxt">Trình bày lộ trình gắn với điểm nghẽn</div>
+          </div>
+          <div class="frow" style="border-color:rgba(0,130,70,0.2);background:rgba(0,130,70,0.06);">
+            <div class="fnum" style="background:rgba(0,130,70,0.15);color:#006040;">!</div>
+            <div class="ftxt" style="color:#006040;font-weight:700;">Khách: "Đây đúng là điều tôi đang cần."</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-light">THE TRUSTED ADVISOR | COACH DUY NGUYEN</div>
+</div>
+
+<!-- S7: ĐỊNH NGHĨA -->
+<div class="slide bg-content" id="s7">
+  <div class="bar-top"></div><div class="bar-left"></div><div class="bar-right"></div>
+  <div class="content" style="position:relative;z-index:3;">
+    <div class="a1 slide-title">Chạm Con Đường Là Gì</div>
+    <div class="a2" style="margin-bottom:20px;padding:22px 28px;background:linear-gradient(135deg,#1B3A5C,#0d2240);border-radius:14px;border-left:6px solid #C4A44E;">
+      <div style="font-size:22px;color:#ffffff;font-weight:600;line-height:1.65;">Chạm Con Đường <span style="color:#D4B46E;">không phải</span> bước giới thiệu sản phẩm. Đây là bước <span style="color:#D4B46E;">kết nối có chủ đích</span> giữa những gì khách tự nói ra với hướng đi phù hợp với chính họ.</div>
+    </div>
+    <div class="g3 a3">
+      <div class="card" style="border-top-color:#c82828;">
+        <div class="cl" style="color:#c82828;">Không Phải</div>
+        <div class="cb">Bài thuyết trình về tính năng và lợi ích sản phẩm</div>
+      </div>
+      <div class="card" style="border-top-color:#c82828;">
+        <div class="cl" style="color:#c82828;">Không Phải</div>
+        <div class="cb">Liệt kê lý do tại sao khách nên mua</div>
+      </div>
+      <div class="card" style="border-top-color:#c82828;">
+        <div class="cl" style="color:#c82828;">Không Phải</div>
+        <div class="cb">Thuyết phục bằng ưu đãi, giảm giá hoặc so sánh đối thủ</div>
+      </div>
+    </div>
+    <div class="a4" style="margin-top:18px;text-align:center;font-size:19px;font-weight:700;color:#5a3a06;font-style:italic;">Nếu khách cần xem brochure để hiểu con đường bạn vừa nói, bạn chưa Chạm Con Đường.</div>
+  </div>
+  <div class="footer-light">THE TRUSTED ADVISOR | COACH DUY NGUYEN</div>
+</div>
+
+<!-- S8: SECTION OPENER 2 -->
+<div class="slide bg-section" id="s8">
+  <div class="bar-top"></div><div class="bar-left"></div><div class="bar-right"></div>
+  <div class="content" style="position:relative;z-index:3;">
+    <div class="a1" style="font-size:12px;font-weight:700;letter-spacing:3px;color:#8a6010;text-transform:uppercase;margin-bottom:16px;">Phần 02 · TTA Mùa 3 · 45 phút</div>
+    <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:32px;">
+      <div class="a2" style="font-size:80px;font-weight:900;color:#0d0d0d;line-height:0.95;text-transform:uppercase;letter-spacing:-3px;">Công<br><span style="color:#8a6010;">Thức</span><br>4 Bước</div>
+      <div class="a2" style="font-size:260px;font-weight:900;line-height:0.82;color:rgba(168,128,32,0.18);pointer-events:none;letter-spacing:-14px;flex-shrink:0;margin-top:-12px;">02</div>
+    </div>
+    <div class="a3" style="width:100%;height:2px;background:linear-gradient(90deg,#9a7218,rgba(168,128,32,0.08));margin:22px 0 18px;"></div>
+    <div class="a4" style="font-size:24px;font-style:italic;font-weight:500;color:#3a3a3a;line-height:1.55;">Xây con đường từ những gì khách đã nói. Không phải từ brochure sản phẩm.</div>
+  </div>
+  <div class="footer-parchment">THE TRUSTED ADVISOR | COACH DUY NGUYEN</div>
+</div>
+
+<!-- S9: CÔNG THỨC TỔNG QUAN -->
+<div class="slide bg-content" id="s9">
+  <div class="bar-top"></div><div class="bar-left"></div><div class="bar-right"></div>
+  <div class="content" style="position:relative;z-index:3;">
+    <div class="a1 slide-title">Công Thức Xây Con Đường</div>
+    <div class="a2" style="text-align:center;font-size:20px;font-weight:700;color:#5a3a06;margin-bottom:22px;padding:12px 24px;background:rgba(196,164,78,0.1);border-radius:10px;border:1px solid rgba(196,164,78,0.25);">CON ĐƯỜNG = NGÔN NGỮ CỦA KHÁCH x 4 BƯỚC TRÌNH BÀY</div>
+    <div class="g2 a3" style="gap:14px;">
+      <div class="frow">
+        <div class="fnum" style="font-size:20px;width:40px;height:40px;">1</div>
+        <div>
+          <div class="ftxt" style="font-size:18px;color:#8a6010;font-weight:900;text-transform:uppercase;">Nhắc Lại</div>
+          <div class="fnote">Nhắc lại đúng những gì khách đã nói ở 2 điểm chạm trước. Không thêm từ của mình.</div>
+        </div>
+      </div>
+      <div class="frow">
+        <div class="fnum" style="font-size:20px;width:40px;height:40px;">2</div>
+        <div>
+          <div class="ftxt" style="font-size:18px;color:#8a6010;font-weight:900;text-transform:uppercase;">Nguyên Tắc</div>
+          <div class="fnote">Nêu cách tiếp cận phù hợp với bài toán của khách, chưa đề cập tên sản phẩm.</div>
+        </div>
+      </div>
+      <div class="frow">
+        <div class="fnum" style="font-size:20px;width:40px;height:40px;">3</div>
+        <div>
+          <div class="ftxt" style="font-size:18px;color:#8a6010;font-weight:900;text-transform:uppercase;">Lộ Trình</div>
+          <div class="fnote">Trình bày sản phẩm như hành trình có cột mốc, mỗi cột mốc gắn với điểm nghẽn khách đã kể.</div>
+        </div>
+      </div>
+      <div class="frow">
+        <div class="fnum" style="font-size:20px;width:40px;height:40px;">4</div>
+        <div>
+          <div class="ftxt" style="font-size:18px;color:#8a6010;font-weight:900;text-transform:uppercase;">Đánh Giá Mức Độ Sẵn Sàng</div>
+          <div class="fnote">Hỏi để khách tự đánh giá sự phù hợp. Không ép, không chốt thay khách.</div>
+        </div>
+      </div>
+    </div>
+    <div class="a4" style="margin-top:16px;padding:12px 20px;background:rgba(27,58,92,0.06);border-radius:8px;text-align:center;">
+      <span style="font-size:16px;color:#3a3a3a;font-weight:600;">Đầu vào bắt buộc: <span style="color:#8a6010;font-weight:700;">ghi chú từ Chạm Động Lực và Chạm Điểm Nghẽn</span>, không phải brochure.</span>
+    </div>
+  </div>
+  <div class="footer-light">THE TRUSTED ADVISOR | COACH DUY NGUYEN</div>
+</div>
+
+<!-- S10: 6 THÀNH PHẦN CỦA CON ĐƯỜNG (MỚI) -->
+<div class="slide bg-content" id="s10">
+  <div class="bar-top"></div><div class="bar-left"></div><div class="bar-right"></div>
+  <div class="content" style="position:relative;z-index:3;">
+    <div class="a1 slide-title">6 Thành Phần Phải Có Trong Một Con Đường Chuẩn</div>
+    <div class="a2" style="font-size:15px;color:#8a6010;font-weight:600;text-align:center;margin-bottom:16px;">Trước khi trình bày 4 bước, hãy kiểm tra bài của mình có đủ 6 thành phần này không.</div>
+    <div class="g2 a3" style="gap:12px;">
+      <div class="card" style="padding:18px 20px;">
+        <div class="cl">Thành phần 1</div>
+        <div class="ct" style="font-size:17px;">Kết quả là nhân dạng mới</div>
+        <div class="cb" style="font-size:15px;">Khách không chỉ đạt kết quả, họ trở thành một phiên bản khác. Nêu phiên bản đó là ai.</div>
+        <div class="cnum">1</div>
+      </div>
+      <div class="card" style="padding:18px 20px;">
+        <div class="cl">Thành phần 2</div>
+        <div class="ct" style="font-size:17px;">Điểm nghẽn hiện tại rõ ràng</div>
+        <div class="cb" style="font-size:15px;">Khách phải thấy được mình đang ở đâu và tại sao mình chưa đến được nơi muốn.</div>
+        <div class="cnum">2</div>
+      </div>
+      <div class="card" style="padding:18px 20px;">
+        <div class="cl">Thành phần 3</div>
+        <div class="ct" style="font-size:17px;">Cột mốc rõ ràng</div>
+        <div class="cb" style="font-size:15px;">Hành trình chia thành các giai đoạn nhỏ, mỗi giai đoạn có chiến thắng cụ thể để khách thấy tiến độ.</div>
+        <div class="cnum">3</div>
+      </div>
+      <div class="card" style="padding:18px 20px;">
+        <div class="cl">Thành phần 4</div>
+        <div class="ct" style="font-size:17px;">Người đồng hành đáng tin</div>
+        <div class="cb" style="font-size:15px;">Khách không đi một mình. Có người theo sát và hỗ trợ trong suốt hành trình.</div>
+        <div class="cnum">4</div>
+      </div>
+      <div class="card" style="padding:18px 20px;">
+        <div class="cl">Thành phần 5</div>
+        <div class="ct" style="font-size:17px;">Nguồn lực đã sẵn sàng</div>
+        <div class="cb" style="font-size:15px;">Mọi công cụ, tài liệu, hỗ trợ cần thiết đều đã được chuẩn bị. Khách không lo bị bỏ giữa chừng.</div>
+        <div class="cnum">5</div>
+      </div>
+      <div class="card" style="padding:18px 20px;">
+        <div class="cl">Thành phần 6</div>
+        <div class="ct" style="font-size:17px;">Hình mẫu đã thành công</div>
+        <div class="cb" style="font-size:15px;">Người thật, kết quả thật, hoàn cảnh tương tự. Giúp khách thấy "nếu họ làm được, mình cũng có thể."</div>
+        <div class="cnum">6</div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-light">THE TRUSTED ADVISOR | COACH DUY NGUYEN</div>
+</div>
+
+<!-- S11: BƯỚC 1 - NHẮC LẠI -->
+<div class="slide bg-content" id="s11">
+  <div class="bar-top"></div><div class="bar-left"></div><div class="bar-right"></div>
+  <div class="content" style="position:relative;z-index:3;">
+    <div class="step-badge a1">
+      <div class="step-num">1</div>
+      <div class="step-name">Nhắc Lại</div>
+    </div>
+    <div class="g2 a2">
+      <div>
+        <div class="card" style="margin-bottom:14px;">
+          <div class="cl">Làm Gì</div>
+          <div class="cb">Nhắc lại đúng những gì khách vừa kể ở Chạm Động Lực và Chạm Điểm Nghẽn. Không thêm từ của mình. Không diễn giải lại.</div>
+        </div>
+        <div class="card">
+          <div class="cl">Lấy Từ Đâu</div>
+          <div class="cb">Ghi chú buổi tư vấn. Phần khách mô tả điều họ muốn và phần họ kể về điều đang cản. Dùng đúng từ họ nói.</div>
+        </div>
+      </div>
+      <div>
+        <div class="script-label">Câu mẫu (ngành đào tạo)</div>
+        <div class="script-box">
+          <p>"Qua những gì anh kể, em hiểu là anh đang muốn <b>tự tin đứng tư vấn mà không cần nhìn script</b>, nhưng cái đang khiến anh chưa làm được là <b>cứ trình bày xong là khách im lặng hoặc nói để suy nghĩ thêm</b>."</p>
+        </div>
+        <div class="card" style="margin-top:14px;border-top-color:#c82828;">
+          <div class="cl" style="color:#c82828;">Hay Bị Sai Ở Đây</div>
+          <div class="cb">Tự thêm từ vào: "Tức là anh muốn <b>có hệ thống bán hàng bài bản</b>." Đây là từ của người bán, không phải của khách.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-light">THE TRUSTED ADVISOR | COACH DUY NGUYEN</div>
+</div>
+
+<!-- S12: BƯỚC 2 - NGUYÊN TẮC -->
+<div class="slide bg-content" id="s12">
+  <div class="bar-top"></div><div class="bar-left"></div><div class="bar-right"></div>
+  <div class="content" style="position:relative;z-index:3;">
+    <div class="step-badge a1">
+      <div class="step-num">2</div>
+      <div class="step-name">Nguyên Tắc</div>
+    </div>
+    <div class="g2 a2">
+      <div>
+        <div class="card" style="margin-bottom:14px;">
+          <div class="cl">Làm Gì</div>
+          <div class="cb">Nêu cách tiếp cận phù hợp với bài toán cụ thể của khách. Chưa nói tên sản phẩm hay chương trình.</div>
+        </div>
+        <div class="card">
+          <div class="cl">Tại Sao Quan Trọng</div>
+          <div class="cb">Khi khách thấy bạn hiểu đúng bài toán của họ, họ mới sẵn sàng nghe về giải pháp. Bỏ bước này là nhảy thẳng vào bán, khách cảm thấy bị dẫn dắt.</div>
+        </div>
+      </div>
+      <div>
+        <div class="script-label">Câu mẫu (ngành đào tạo)</div>
+        <div class="script-box">
+          <p>"Với trường hợp của anh, cái cần thay trước thường <b>không phải là học thêm kỹ thuật chốt</b>. Điều cần làm trước là thay cách anh dẫn khách đi, để họ tự thấy mình đang cần gì, tại sao chưa có, và tại sao bây giờ là lúc nên thay đổi."</p>
+        </div>
+        <div class="card" style="margin-top:14px;border-top-color:#c82828;">
+          <div class="cl" style="color:#c82828;">Hay Bị Sai Ở Đây</div>
+          <div class="cb">Nhảy thẳng vào tên sản phẩm: "Chương trình TTA của chúng tôi..." Đây là bỏ qua bước 2, nhảy sang bước 3.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-light">THE TRUSTED ADVISOR | COACH DUY NGUYEN</div>
+</div>
+
+<!-- S13: BƯỚC 3 - LỘ TRÌNH -->
+<div class="slide bg-content" id="s13">
+  <div class="bar-top"></div><div class="bar-left"></div><div class="bar-right"></div>
+  <div class="content" style="position:relative;z-index:3;">
+    <div class="step-badge a1">
+      <div class="step-num">3</div>
+      <div class="step-name">Lộ Trình</div>
+    </div>
+    <div class="g2 a2">
+      <div>
+        <div class="card" style="margin-bottom:14px;">
+          <div class="cl">Làm Gì</div>
+          <div class="cb">Trình bày sản phẩm như một hành trình có cột mốc. Mỗi cột mốc nêu kết quả cụ thể, gắn với điểm nghẽn khách đã kể.</div>
+        </div>
+        <div class="card">
+          <div class="cl">Quy Tắc</div>
+          <div class="cb">Không liệt kê tính năng. Tối đa 3 cột mốc. Mỗi cột mốc 1 câu kết quả và 1 câu giải thích tại sao nó tháo đúng điểm nghẽn.</div>
+        </div>
+      </div>
+      <div>
+        <div class="script-label">Câu mẫu (ngành đào tạo)</div>
+        <div class="script-box">
+          <p>"Em đề xuất mình đi theo 3 bước. <b>Bước đầu</b>, trong 2 tuần đầu anh sẽ biết cách hỏi để khách tự nói ra điều đang cần, đây đúng là phần đang khiến anh mất khách sau khi trình bày. <b>Bước hai</b>, anh xây được cách trình bày nghe như đang tư vấn chứ không như đang bán. <b>Bước ba</b>, anh gỡ được từ chối mà không làm khách cảm thấy bị ép."</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-light">THE TRUSTED ADVISOR | COACH DUY NGUYEN</div>
+</div>
+
+<!-- S14: BƯỚC 4 - ĐÁNH GIÁ MỨC ĐỘ SẴN SÀNG -->
+<div class="slide bg-content" id="s14">
+  <div class="bar-top"></div><div class="bar-left"></div><div class="bar-right"></div>
+  <div class="content" style="position:relative;z-index:3;">
+    <div class="step-badge a1">
+      <div class="step-num">4</div>
+      <div class="step-name">Đánh Giá Mức Độ Sẵn Sàng</div>
+    </div>
+    <div class="g2 a2">
+      <div>
+        <div class="card" style="margin-bottom:14px;">
+          <div class="cl">Làm Gì</div>
+          <div class="cb">Hỏi 1 câu để khách tự đánh giá xem hướng này có phù hợp với họ không. Không phải câu chốt sales. Không phải câu khẳng định.</div>
+        </div>
+        <div class="card">
+          <div class="cl">Tại Sao Phải Là Câu Hỏi</div>
+          <div class="cb">Khi khách tự trả lời, quyết định là của họ. Họ không cảm thấy bị bán. Đây là ranh giới giữa cố vấn và người chào hàng.</div>
+        </div>
+      </div>
+      <div>
+        <div class="script-label">Câu mẫu</div>
+        <div class="script-box">
+          <p>"Dựa trên những gì anh vừa chia sẻ, anh thấy hướng này có hợp với anh không?"</p>
+        </div>
+        <div style="margin-top:14px;padding:14px 18px;background:rgba(196,164,78,0.06);border-radius:10px;border:1px solid rgba(196,164,78,0.2);">
+          <div style="font-size:13px;font-weight:900;letter-spacing:2px;text-transform:uppercase;color:#8a6010;margin-bottom:8px;">Sau câu hỏi này</div>
+          <div style="font-size:16px;color:#2a2a2a;line-height:1.6;">Im lặng và để khách trả lời. Câu trả lời của khách sẽ cho bạn biết cần làm gì tiếp theo.</div>
+        </div>
+        <div class="card" style="margin-top:12px;border-top-color:#c82828;">
+          <div class="cl" style="color:#c82828;">Hay Bị Sai Ở Đây</div>
+          <div class="cb">Biến thành câu chốt: "Vậy anh đăng ký luôn nhé?" Đây là ép quyết định, không phải đánh giá.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-light">THE TRUSTED ADVISOR | COACH DUY NGUYEN</div>
+</div>
+
+<!-- S15: ĐỌC TÍN HIỆU SAU CÂU HỎI -->
+<div class="slide bg-content" id="s15">
+  <div class="bar-top"></div><div class="bar-left"></div><div class="bar-right"></div>
+  <div class="content" style="position:relative;z-index:3;">
+    <div class="a1 slide-title">Đọc Tín Hiệu Sau Câu Hỏi Đánh Giá</div>
+    <div class="flow a2">
+      <div class="frow" style="border-color:rgba(0,130,70,0.3);background:rgba(0,130,70,0.04);">
+        <div class="fnum" style="background:rgba(0,130,70,0.15);color:#006040;font-size:13px;font-weight:700;width:auto;height:auto;border-radius:6px;padding:4px 10px;">Tín hiệu 1</div>
+        <div>
+          <div class="ftxt">"Nghe có vẻ đúng với mình" hoặc "Tôi thấy hướng này phù hợp"</div>
+          <div class="fnote" style="color:#006040;font-weight:600;">Sẵn sàng đi tiếp. Hỏi về bước khởi động: "Anh muốn bắt đầu từ giai đoạn nào trước?"</div>
+        </div>
+      </div>
+      <div class="frow" style="border-color:rgba(168,128,32,0.35);background:rgba(168,128,32,0.04);">
+        <div class="fnum" style="background:rgba(168,128,32,0.15);color:#7a5008;font-size:13px;font-weight:700;width:auto;height:auto;border-radius:6px;padding:4px 10px;">Tín hiệu 2</div>
+        <div>
+          <div class="ftxt">"Tôi muốn hiểu thêm về bước X"</div>
+          <div class="fnote" style="color:#7a5008;font-weight:600;">Bước Lộ trình chưa đủ rõ. Quay lại làm rõ bước đó trước khi hỏi tiếp.</div>
+        </div>
+      </div>
+      <div class="frow" style="border-color:rgba(200,40,40,0.25);background:rgba(200,40,40,0.04);">
+        <div class="fnum" style="background:rgba(200,40,40,0.12);color:#c82828;font-size:13px;font-weight:700;width:auto;height:auto;border-radius:6px;padding:4px 10px;">Tín hiệu 3</div>
+        <div>
+          <div class="ftxt">"Tôi chưa chắc" hoặc im lặng không phản hồi</div>
+          <div class="fnote" style="color:#c82828;font-weight:600;">Điểm nghẽn chưa được chạm đủ sâu. Quay lại hỏi: "Anh đang băn khoăn ở điểm nào nhất?"</div>
+        </div>
+      </div>
+    </div>
+    <div class="a3" style="margin-top:16px;padding:12px 20px;background:rgba(196,164,78,0.08);border-radius:8px;border-left:4px solid #C4A44E;">
+      <div style="font-size:17px;color:#3a2408;font-weight:600;font-style:italic;">Câu hỏi đánh giá không phải điểm kết thúc. Nó là điểm kiểm tra để biết cần làm gì tiếp theo.</div>
+    </div>
+  </div>
+  <div class="footer-light">THE TRUSTED ADVISOR | COACH DUY NGUYEN</div>
+</div>
+
+<!-- S16: THỰC HÀNH 1 -->
+<div class="slide bg-practice" id="s16">
+  <div class="border-practice"></div>
+  <div class="content" style="position:relative;z-index:3;">
+    <div style="display:flex;align-items:center;margin-bottom:18px;">
+      <div class="badge-p a1">Thực Hành 1</div>
+      <div class="badge-t a1">20 Phút</div>
+    </div>
+    <div class="a2" style="font-size:32px;font-weight:900;color:#0d0d0d;margin-bottom:20px;line-height:1.2;">Viết Bài Chạm Con Đường<br>Cho Khách Hàng Của Bạn</div>
+    <div class="steps a3">
+      <div class="srow">
+        <div class="snum">1</div>
+        <div>
+          <div class="stxt">Chọn 1 khách hàng thực mà bạn đã tư vấn hoặc đang tư vấn.</div>
+          <div class="snote">Lấy ghi chú buổi đó ra. Ghi lại bằng dấu ngoặc kép những từ khách đã tự nói về điều họ muốn và điều đang cản.</div>
+        </div>
+      </div>
+      <div class="srow">
+        <div class="snum">2</div>
+        <div>
+          <div class="stxt">Viết bài Chạm Con Đường 4 bước cho khách đó bằng văn bản hoàn chỉnh.</div>
+          <div class="snote">Dùng đúng từ khách đã nói ở bước 1. Không đề cập tên sản phẩm ở bước 1 và bước 2.</div>
+        </div>
+      </div>
+      <div class="srow">
+        <div class="snum">3</div>
+        <div>
+          <div class="stxt">Đọc cho bạn cặp nghe từ góc độ khách. Hỏi: câu nào nghe như đang bán?</div>
+          <div class="snote">Bạn cặp phản hồi như khách hàng thật, không phải như người chấm bài kỹ thuật.</div>
+        </div>
+      </div>
+    </div>
+    <div class="pcap a4">Kết quả: 1 bài viết tay sẵn sàng mang lên chữa bài trước lớp.</div>
+  </div>
+  <div class="footer-light">THE TRUSTED ADVISOR | COACH DUY NGUYEN</div>
+</div>
+
+<!-- S17: SECTION OPENER 3 -->
+<div class="slide bg-section" id="s17">
+  <div class="bar-top"></div><div class="bar-left"></div><div class="bar-right"></div>
+  <div class="content" style="position:relative;z-index:3;">
+    <div class="a1" style="font-size:12px;font-weight:700;letter-spacing:3px;color:#8a6010;text-transform:uppercase;margin-bottom:16px;">Phần 03 · TTA Mùa 3 · 35 phút</div>
+    <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:32px;">
+      <div class="a2" style="font-size:80px;font-weight:900;color:#0d0d0d;line-height:0.95;text-transform:uppercase;letter-spacing:-3px;">Thực<br><span style="color:#8a6010;">Chiến</span></div>
+      <div class="a2" style="font-size:260px;font-weight:900;line-height:0.82;color:rgba(168,128,32,0.18);pointer-events:none;letter-spacing:-14px;flex-shrink:0;margin-top:-12px;">03</div>
+    </div>
+    <div class="a3" style="width:100%;height:2px;background:linear-gradient(90deg,#9a7218,rgba(168,128,32,0.08));margin:22px 0 18px;"></div>
+    <div class="a4" style="font-size:24px;font-style:italic;font-weight:500;color:#3a3a3a;line-height:1.55;">Phân tích bài mẫu, nhận ra lỗi thường gặp, và roleplay thực chiến trước lớp.</div>
+  </div>
+  <div class="footer-parchment">THE TRUSTED ADVISOR | COACH DUY NGUYEN</div>
+</div>
+
+<!-- S18: BÀI MẪU HOÀN CHỈNH -->
+<div class="slide bg-content" id="s18">
+  <div class="bar-top"></div><div class="bar-left"></div><div class="bar-right"></div>
+  <div class="content" style="position:relative;z-index:3;">
+    <div class="a1 slide-title">Bài Mẫu Hoàn Chỉnh</div>
+    <div style="font-size:13px;color:#8a6010;font-weight:700;margin-bottom:12px;" class="a1">Tình huống: Sales tư vấn cho giám đốc trung tâm tiếng Anh về chương trình đào tạo kỹ năng bán hàng cho đội tư vấn tuyển sinh.</div>
+    <div class="flow a2" style="gap:8px;">
+      <div style="background:#fffbf0;border:1.5px solid rgba(168,128,32,0.2);border-radius:10px;padding:12px 18px;">
+        <div class="annot annot-1">Bước 1 · Nhắc Lại</div>
+        <div style="font-size:16px;color:#1a1a1a;line-height:1.7;font-style:italic;">"Qua những gì anh kể, em hiểu là anh đang muốn <b>đội tư vấn chốt được ngay buổi đầu</b>, nhưng cái đang cản là <b>cứ trình bày học phí xong là khách im lặng hoặc hẹn nghĩ thêm</b>."</div>
+      </div>
+      <div style="background:#f0f7ff;border:1.5px solid rgba(27,58,92,0.15);border-radius:10px;padding:12px 18px;">
+        <div class="annot annot-2">Bước 2 · Nguyên Tắc</div>
+        <div style="font-size:16px;color:#1a1a1a;line-height:1.7;font-style:italic;">"Vấn đề thường không phải do học phí cao. Đội của anh đang <b>nói về khóa học trước khi khách tự thấy mình cần</b>. Cái cần thay trước là cách đội anh đặt câu hỏi, không phải cách chốt."</div>
+      </div>
+      <div style="background:#fff8f0;border:1.5px solid rgba(106,62,6,0.15);border-radius:10px;padding:12px 18px;">
+        <div class="annot annot-3">Bước 3 · Lộ Trình</div>
+        <div style="font-size:16px;color:#1a1a1a;line-height:1.7;font-style:italic;">"Em đề xuất mình đi theo 3 bước. <b>Bước đầu</b>, đội anh học cách hỏi để phụ huynh tự nói ra điều đang lo, đây đúng là lý do cuộc tư vấn hay kết thúc bằng 'để suy nghĩ thêm'. <b>Bước hai</b>, họ trình bày học phí theo cách khách tự thấy xứng đáng. <b>Bước ba</b>, xử lý từ chối mà không cần giảm giá."</div>
+      </div>
+      <div style="background:#f0fff8;border:1.5px solid rgba(0,130,70,0.18);border-radius:10px;padding:12px 18px;">
+        <div class="annot annot-4">Bước 4 · Đánh Giá Mức Độ Sẵn Sàng</div>
+        <div style="font-size:16px;color:#1a1a1a;line-height:1.7;font-style:italic;">"Dựa trên những gì anh vừa chia sẻ về đội tư vấn, anh thấy hướng này có hợp với anh không?"</div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-light">THE TRUSTED ADVISOR | COACH DUY NGUYEN</div>
+</div>
+
+<!-- S19: LỖI PHỔ BIẾN -->
+<div class="slide bg-content" id="s19">
+  <div class="bar-top"></div><div class="bar-left"></div><div class="bar-right"></div>
+  <div class="content" style="position:relative;z-index:3;">
+    <div class="a1 slide-title">4 Lỗi Hay Gặp Nhất</div>
+    <div class="flow a2" style="gap:10px;">
+      <div class="err-row err-bad">
+        <div style="font-size:22px;font-weight:900;color:#c82828;flex-shrink:0;min-width:28px;">1</div>
+        <div>
+          <div class="err-label" style="color:#c82828;">Bước Nhắc Lại</div>
+          <div class="err-txt">Tự thêm từ thay vì dùng từ của khách. "Tức là anh muốn <b>tối ưu quy trình bán hàng</b>" trong khi khách chưa nói câu đó bao giờ.</div>
+        </div>
+      </div>
+      <div class="err-row err-bad">
+        <div style="font-size:22px;font-weight:900;color:#c82828;flex-shrink:0;min-width:28px;">2</div>
+        <div>
+          <div class="err-label" style="color:#c82828;">Bước Nguyên Tắc</div>
+          <div class="err-txt">Nhảy thẳng vào tên sản phẩm: "Chương trình TTA của chúng tôi..." Bỏ qua bước nguyên tắc, khách chưa thấy bạn hiểu bài toán của họ.</div>
+        </div>
+      </div>
+      <div class="err-row err-bad">
+        <div style="font-size:22px;font-weight:900;color:#c82828;flex-shrink:0;min-width:28px;">3</div>
+        <div>
+          <div class="err-label" style="color:#c82828;">Bước Lộ Trình</div>
+          <div class="err-txt">Liệt kê nội dung thay vì kết quả: "Buổi 1 học lý thuyết, buổi 2 thực hành..." Khách không thấy điểm nghẽn của họ được giải quyết ở đâu.</div>
+        </div>
+      </div>
+      <div class="err-row err-bad">
+        <div style="font-size:22px;font-weight:900;color:#c82828;flex-shrink:0;min-width:28px;">4</div>
+        <div>
+          <div class="err-label" style="color:#c82828;">Bước Đánh Giá</div>
+          <div class="err-txt">Biến thành câu chốt: "Vậy anh đăng ký luôn nhé?" Khách cảm thấy bị ép thay vì tự quyết định.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-light">THE TRUSTED ADVISOR | COACH DUY NGUYEN</div>
+</div>
+
+<!-- S20: TIÊU CHÍ TỰ KIỂM TRA -->
+<div class="slide bg-content" id="s20">
+  <div class="bar-top"></div><div class="bar-left"></div><div class="bar-right"></div>
+  <div class="content" style="position:relative;z-index:3;">
+    <div class="a1 slide-title">3 Câu Tự Kiểm Tra Bài Của Bạn</div>
+    <div class="flow a2" style="gap:16px;">
+      <div class="frow" style="padding:20px 22px;">
+        <div class="fnum" style="font-size:22px;width:44px;height:44px;">1</div>
+        <div>
+          <div class="ftxt" style="font-size:19px;">Trong bài của bạn, có từ nào là từ khách đã tự nói không?</div>
+          <div class="fnote" style="font-size:15px;margin-top:6px;">Nếu không có, toàn bài là ngôn ngữ của người bán. Quay lại đọc ghi chú buổi tư vấn và viết lại từ bước 1.</div>
+        </div>
+      </div>
+      <div class="frow" style="padding:20px 22px;">
+        <div class="fnum" style="font-size:22px;width:44px;height:44px;">2</div>
+        <div>
+          <div class="ftxt" style="font-size:19px;">Bạn nói tên sản phẩm ở bước nào?</div>
+          <div class="fnote" style="font-size:15px;margin-top:6px;">Nếu ở bước 1 hoặc 2, cần sửa lại. Tên sản phẩm chỉ xuất hiện ở bước 3, trong phần lộ trình có cột mốc.</div>
+        </div>
+      </div>
+      <div class="frow" style="padding:20px 22px;">
+        <div class="fnum" style="font-size:22px;width:44px;height:44px;">3</div>
+        <div>
+          <div class="ftxt" style="font-size:19px;">Câu cuối của bạn là câu hỏi hay câu mời hành động?</div>
+          <div class="fnote" style="font-size:15px;margin-top:6px;">Phải là câu hỏi để khách tự đánh giá. Nếu là câu mời đăng ký hay câu khẳng định, đó là câu chốt sales, không phải đánh giá.</div>
+        </div>
+      </div>
+    </div>
+    <div class="a3" style="margin-top:16px;text-align:center;font-size:18px;font-weight:700;color:#5a3a06;font-style:italic;">Bài tốt là bài khách nghe xong và nói: "Đúng rồi, đó là điều tôi cần." Không phải: "Nghe hay đấy, để tôi nghĩ thêm."</div>
+  </div>
+  <div class="footer-light">THE TRUSTED ADVISOR | COACH DUY NGUYEN</div>
+</div>
+
+<!-- S21: THỰC HÀNH 2 - ROLEPLAY -->
+<div class="slide bg-practice" id="s21">
+  <div class="border-practice"></div>
+  <div class="content" style="position:relative;z-index:3;">
+    <div style="display:flex;align-items:center;margin-bottom:18px;">
+      <div class="badge-p a1">Thực Hành 2</div>
+      <div class="badge-t a1">20 Phút</div>
+    </div>
+    <div class="a2" style="font-size:32px;font-weight:900;color:#0d0d0d;margin-bottom:20px;line-height:1.2;">Roleplay Chữa Bài Trên Lớp</div>
+    <div class="steps a3">
+      <div class="srow">
+        <div class="snum">1</div>
+        <div>
+          <div class="stxt">Nhóm 3 người. Luân phiên vai: 1 người trình bày bài, 1 người đóng vai khách, 1 người ghi nhận.</div>
+          <div class="snote">Người ghi nhận dùng 3 câu tự kiểm tra để nhận xét sau mỗi lượt trình bày.</div>
+        </div>
+      </div>
+      <div class="srow">
+        <div class="snum">2</div>
+        <div>
+          <div class="stxt">Người đóng vai khách phản hồi tự nhiên. Không nhận xét kỹ thuật trong lúc nghe.</div>
+          <div class="snote">Chú ý: câu nào khiến bạn muốn lắng nghe tiếp, câu nào khiến bạn muốn nói "để suy nghĩ thêm".</div>
+        </div>
+      </div>
+      <div class="srow">
+        <div class="snum">3</div>
+        <div>
+          <div class="stxt">Xoay vòng đủ 3 người. 2 bài hay nhất được mang lên chia sẻ trước lớp để Coach chữa.</div>
+          <div class="snote">Chọn bài có nhiều từ của khách nhất và câu đánh giá là câu hỏi thật sự.</div>
+        </div>
+      </div>
+    </div>
+    <div class="pcap a4">Mục tiêu: nghe được sự khác biệt giữa "bán giải pháp" và "dẫn con đường" qua thực tế.</div>
+  </div>
+  <div class="footer-light">THE TRUSTED ADVISOR | COACH DUY NGUYEN</div>
+</div>
+
+<!-- S22: CLOSING -->
+<div class="slide bg-closing" id="s22">
+  <div class="bar-top"></div><div class="bar-left"></div><div class="bar-right"></div>
+  <div class="content" style="position:relative;z-index:3;">
+    <div class="a1 slide-title-d">3 Điều Cốt Lõi Mang Về</div>
+    <div class="trow a2">
+      <div class="tnum">01</div>
+      <div class="ttxt">Chạm Con Đường không phải bài giới thiệu sản phẩm. Đây là bước <span class="tgold">kết nối có chủ đích từ ngôn ngữ của khách</span> sang hướng đi phù hợp với họ.</div>
+    </div>
+    <div class="trow a3">
+      <div class="tnum">02</div>
+      <div class="ttxt">Công thức 4 bước: <span class="tgold">Nhắc lại, Nguyên tắc, Lộ trình, Đánh giá mức độ sẵn sàng.</span> Đầu vào là ghi chú buổi tư vấn, không phải brochure.</div>
+    </div>
+    <div class="trow a4">
+      <div class="tnum">03</div>
+      <div class="ttxt">Một con đường chuẩn cần đủ <span class="tgold">6 thành phần:</span> nhân dạng mới, điểm nghẽn rõ ràng, cột mốc cụ thể, người đồng hành, nguồn lực sẵn sàng, hình mẫu thành công.</div>
+    </div>
+  </div>
+  <div class="footer-dark">THE TRUSTED ADVISOR | COACH DUY NGUYEN</div>
+</div>
+
+<!-- S23: CHALLENGE -->
+<div class="slide bg-challenge" id="s23">
+  <div class="bar-top"></div><div class="bar-left"></div><div class="bar-right"></div>
+  <div class="content" style="position:relative;z-index:3;text-align:center;">
+    <div class="a1" style="font-size:13px;font-weight:700;letter-spacing:3px;color:rgba(255,255,255,0.6);text-transform:uppercase;margin-bottom:16px;">Thử Thách Tuần · B7</div>
+    <div class="a2" style="font-size:44px;font-weight:900;color:#D4B46E;line-height:1.1;margin-bottom:10px;animation:glowBreath 3s ease-in-out infinite;">Thi Tỷ Lệ Chuyển Đổi</div>
+    <div class="a3" style="width:80px;height:2px;background:linear-gradient(90deg,transparent,#C4A44E,transparent);margin:0 auto 22px;"></div>
+    <div class="a4" style="max-width:780px;margin:0 auto;">
+      <div style="background:rgba(255,255,255,0.07);border:1.5px solid rgba(196,164,78,0.25);border-radius:14px;padding:24px 28px;text-align:left;">
+        <div class="flow" style="gap:12px;">
+          <div style="display:flex;gap:14px;align-items:flex-start;">
+            <div style="font-size:18px;font-weight:900;color:#C4A44E;min-width:26px;">1</div>
+            <div style="font-size:18px;color:rgba(255,255,255,0.85);line-height:1.6;">Trong mỗi cuộc tư vấn có bước trình bày sản phẩm, áp dụng công thức 4 bước thay cho cách trình bày cũ.</div>
+          </div>
+          <div style="display:flex;gap:14px;align-items:flex-start;">
+            <div style="font-size:18px;font-weight:900;color:#C4A44E;min-width:26px;">2</div>
+            <div style="font-size:18px;color:rgba(255,255,255,0.85);line-height:1.6;">Ghi lại số buổi đã trình bày và số buổi khách đồng ý đi tiếp sau khi nghe xong.</div>
+          </div>
+          <div style="display:flex;gap:14px;align-items:flex-start;">
+            <div style="font-size:18px;font-weight:900;color:#C4A44E;min-width:26px;">3</div>
+            <div style="font-size:18px;color:rgba(255,255,255,0.85);line-height:1.6;">Đầu B8, người có tỷ lệ chuyển đổi cao nhất chia sẻ bài trình bày của mình cho cả lớp.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="a5" style="margin-top:20px;font-size:16px;color:rgba(255,255,255,0.45);font-style:italic;">Buổi tiếp theo · B8: Gỡ Rối Và Chốt Bằng REFLECT</div>
+  </div>
+  <div class="footer-dark">THE TRUSTED ADVISOR | COACH DUY NGUYEN</div>
+</div>
+
+<!-- S24: TỰ HỌC - OPENER -->
+<div class="slide bg-selflearn" id="s24">
+  <div class="bar-top"></div><div class="bar-left"></div><div class="bar-right"></div>
+  <div class="content" style="position:relative;z-index:3;text-align:center;">
+    <div class="a1" style="font-size:13px;font-weight:700;letter-spacing:3px;color:rgba(255,255,255,0.6);text-transform:uppercase;margin-bottom:20px;">Phần Tự Học Tại Nhà · Mang Về Và Ôn Lại</div>
+    <div class="a2" style="font-size:52px;font-weight:900;color:#ffffff;line-height:1.1;margin-bottom:16px;">Tài Liệu<br><span style="color:#D4B46E;">Tự Học</span></div>
+    <div class="a3" style="width:80px;height:2px;background:linear-gradient(90deg,transparent,#C4A44E,transparent);margin:0 auto 22px;"></div>
+    <div class="a4" style="font-size:19px;color:rgba(255,255,255,0.65);line-height:1.7;max-width:680px;margin:0 auto;">4 trang tiếp theo đủ để bạn ôn lại toàn bộ công thức, ngôn ngữ mẫu, bài tập và tiêu chí tự đánh giá mà không cần nghe lại buổi học.</div>
+    <div class="a5" style="margin-top:24px;display:inline-flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+      <div style="background:rgba(196,164,78,0.12);border:1px solid rgba(196,164,78,0.3);border-radius:8px;padding:10px 20px;font-size:15px;color:#D4B46E;font-weight:700;">Công thức 4 bước</div>
+      <div style="background:rgba(196,164,78,0.12);border:1px solid rgba(196,164,78,0.3);border-radius:8px;padding:10px 20px;font-size:15px;color:#D4B46E;font-weight:700;">Bảng ngôn ngữ mẫu</div>
+      <div style="background:rgba(196,164,78,0.12);border:1px solid rgba(196,164,78,0.3);border-radius:8px;padding:10px 20px;font-size:15px;color:#D4B46E;font-weight:700;">Bài tập tự luyện</div>
+      <div style="background:rgba(196,164,78,0.12);border:1px solid rgba(196,164,78,0.3);border-radius:8px;padding:10px 20px;font-size:15px;color:#D4B46E;font-weight:700;">Tiêu chí tự đánh giá</div>
+    </div>
+  </div>
+  <div class="footer-dark">THE TRUSTED ADVISOR | COACH DUY NGUYEN</div>
+</div>
+
+<!-- S25: TỰ HỌC - CÔNG THỨC -->
+<div class="slide bg-selflearn" id="s25">
+  <div class="bar-top"></div><div class="bar-left"></div><div class="bar-right"></div>
+  <div class="content" style="position:relative;z-index:3;">
+    <div class="selflearn-tag a1">Tự Học Tại Nhà · Trang 1/4</div>
+    <div class="a2 slide-title-d" style="margin-bottom:16px;">Công Thức 4 Bước Xây Con Đường</div>
+    <div class="a3" style="text-align:center;font-size:17px;font-weight:700;color:#D4B46E;margin-bottom:16px;padding:10px 20px;background:rgba(196,164,78,0.1);border-radius:8px;">CON ĐƯỜNG = NGÔN NGỮ CỦA KHÁCH x 4 BƯỚC</div>
+    <div class="g2 a4" style="gap:12px;">
+      <div class="card-dark">
+        <div class="cl-d">Bước 1 · Nhắc Lại</div>
+        <div class="ct-d" style="font-size:16px;">Nhắc lại từ ngữ của khách</div>
+        <div class="cb-d" style="font-size:15px;">Lấy từ ghi chú Chạm Động Lực và Chạm Điểm Nghẽn. Không thêm từ của mình. Không diễn giải lại.</div>
+      </div>
+      <div class="card-dark">
+        <div class="cl-d">Bước 2 · Nguyên Tắc</div>
+        <div class="ct-d" style="font-size:16px;">Nêu cách tiếp cận phù hợp</div>
+        <div class="cb-d" style="font-size:15px;">Chưa nói tên sản phẩm. Nói về hướng giải quyết bài toán cụ thể của khách để họ thấy bạn hiểu đúng.</div>
+      </div>
+      <div class="card-dark">
+        <div class="cl-d">Bước 3 · Lộ Trình</div>
+        <div class="ct-d" style="font-size:16px;">Trình bày như hành trình</div>
+        <div class="cb-d" style="font-size:15px;">Tối đa 3 cột mốc. Mỗi cột mốc là 1 kết quả cụ thể, gắn với điểm nghẽn khách đã kể. Không liệt kê nội dung hay tính năng.</div>
+      </div>
+      <div class="card-dark">
+        <div class="cl-d">Bước 4 · Đánh Giá Mức Độ Sẵn Sàng</div>
+        <div class="ct-d" style="font-size:16px;">Để khách tự đánh giá</div>
+        <div class="cb-d" style="font-size:15px;">Luôn là câu hỏi, không phải câu mời hành động. Để khách tự quyết định, không cảm thấy bị bán.</div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-dark">THE TRUSTED ADVISOR | COACH DUY NGUYEN</div>
+</div>
+
+<!-- S26: TỰ HỌC - BẢNG NGÔN NGỮ MẪU -->
+<div class="slide bg-selflearn" id="s26">
+  <div class="bar-top"></div><div class="bar-left"></div><div class="bar-right"></div>
+  <div class="content" style="position:relative;z-index:3;">
+    <div class="selflearn-tag a1">Tự Học Tại Nhà · Trang 2/4</div>
+    <div class="a2 slide-title-d" style="margin-bottom:18px;">Bảng Ngôn Ngữ Mẫu 4 Bước</div>
+    <div class="a3">
+      <table class="dtbl" style="background:rgba(255,255,255,0.04);">
+        <thead>
+          <tr>
+            <th style="color:#D4B46E;background:rgba(196,164,78,0.12);width:20%;">Bước</th>
+            <th style="color:#D4B46E;background:rgba(196,164,78,0.12);width:30%;">Bắt đầu bằng</th>
+            <th style="color:#D4B46E;background:rgba(196,164,78,0.12);">Câu mẫu mở đầu</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="background:rgba(255,255,255,0.05);color:#D4B46E;font-weight:700;">1 · Nhắc Lại</td>
+            <td style="background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.75);">Từ ngữ của khách</td>
+            <td style="background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.85);font-style:italic;">"Qua những gì anh/chị kể, em hiểu là anh/chị đang muốn [TỪ CỦA KHÁCH], nhưng cái đang cản là [TỪ CỦA KHÁCH]."</td>
+          </tr>
+          <tr>
+            <td style="background:rgba(255,255,255,0.03);color:#D4B46E;font-weight:700;">2 · Nguyên Tắc</td>
+            <td style="background:rgba(255,255,255,0.03);color:rgba(255,255,255,0.75);">Cách tiếp cận, chưa nói tên sản phẩm</td>
+            <td style="background:rgba(255,255,255,0.03);color:rgba(255,255,255,0.85);font-style:italic;">"Với trường hợp của anh/chị, cái cần thay trước thường không phải là [CÁCH CŨ], mà là [NGUYÊN TẮC PHÙ HỢP]."</td>
+          </tr>
+          <tr>
+            <td style="background:rgba(255,255,255,0.05);color:#D4B46E;font-weight:700;">3 · Lộ Trình</td>
+            <td style="background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.75);">Đề xuất, rồi chia giai đoạn</td>
+            <td style="background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.85);font-style:italic;">"Em đề xuất mình đi theo 3 bước. Bước đầu... [KẾT QUẢ], đây đúng là phần đang khiến [ĐIỂM NGHẼN KHÁCH ĐÃ KỂ]."</td>
+          </tr>
+          <tr>
+            <td style="background:rgba(255,255,255,0.03);color:#D4B46E;font-weight:700;">4 · Đánh Giá</td>
+            <td style="background:rgba(255,255,255,0.03);color:rgba(255,255,255,0.75);">Câu hỏi mở, để khách tự trả lời</td>
+            <td style="background:rgba(255,255,255,0.03);color:rgba(255,255,255,0.85);font-style:italic;">"Dựa trên những gì anh/chị vừa chia sẻ, anh/chị thấy hướng này có hợp với mình không?"</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="a4" style="margin-top:14px;padding:12px 18px;background:rgba(196,164,78,0.08);border-radius:8px;border-left:4px solid #C4A44E;">
+      <div style="font-size:16px;color:rgba(255,255,255,0.75);">Thay nội dung trong dấu ngoặc vuông bằng những gì khách đã nói trong buổi tư vấn cụ thể. Đây là công thức, không phải kịch bản đọc chép.</div>
+    </div>
+  </div>
+  <div class="footer-dark">THE TRUSTED ADVISOR | COACH DUY NGUYEN</div>
+</div>
+
+<!-- S27: TỰ HỌC - BÀI TẬP -->
+<div class="slide bg-selflearn" id="s27">
+  <div class="bar-top"></div><div class="bar-left"></div><div class="bar-right"></div>
+  <div class="content" style="position:relative;z-index:3;">
+    <div class="selflearn-tag a1">Tự Học Tại Nhà · Trang 3/4</div>
+    <div class="a2 slide-title-d" style="margin-bottom:18px;">Bài Tập Tự Luyện</div>
+    <div class="steps a3" style="background:rgba(255,255,255,0.06);border-color:rgba(196,164,78,0.2);">
+      <div class="srow" style="border-bottom-color:rgba(196,164,78,0.15);">
+        <div class="snum">1</div>
+        <div>
+          <div class="stxt" style="color:rgba(255,255,255,0.9);">Chọn 1 khách hàng thực mà bạn đã Chạm Động Lực và Chạm Điểm Nghẽn.</div>
+          <div class="snote" style="color:rgba(255,255,255,0.5);">Phải là khách có ghi chú. Không làm bài tập bằng khách tưởng tượng.</div>
+        </div>
+      </div>
+      <div class="srow" style="border-bottom-color:rgba(196,164,78,0.15);">
+        <div class="snum">2</div>
+        <div>
+          <div class="stxt" style="color:rgba(255,255,255,0.9);">Ghi lại bằng dấu ngoặc kép những từ khách tự nói về điều họ muốn và điều đang cản.</div>
+          <div class="snote" style="color:rgba(255,255,255,0.5);">Đây là nguyên liệu cho bước 1. Nếu không có từ của khách trong dấu ngoặc kép, bạn sẽ tự đặt từ và bài sẽ sai ngay từ bước đầu.</div>
+        </div>
+      </div>
+      <div class="srow" style="border-bottom-color:rgba(196,164,78,0.15);">
+        <div class="snum">3</div>
+        <div>
+          <div class="stxt" style="color:rgba(255,255,255,0.9);">Viết bài Chạm Con Đường 4 bước hoàn chỉnh bằng văn bản trước khi gặp khách.</div>
+          <div class="snote" style="color:rgba(255,255,255,0.5);">Không ứng khẩu. Mục đích là để bạn thấy rõ chỗ nào dùng từ của khách và chỗ nào bạn tự thêm vào.</div>
+        </div>
+      </div>
+      <div class="srow">
+        <div class="snum">4</div>
+        <div>
+          <div class="stxt" style="color:rgba(255,255,255,0.9);">Sau buổi gặp, ghi lại khách nói gì sau câu hỏi đánh giá và mang vào B8.</div>
+          <div class="snote" style="color:rgba(255,255,255,0.5);">Tín hiệu là gì? Bạn xử lý tiếp ra sao? Đây là nguyên liệu cho phần thực chiến B8.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-dark">THE TRUSTED ADVISOR | COACH DUY NGUYEN</div>
+</div>
+
+<!-- S28: TỰ HỌC - TIÊU CHÍ -->
+<div class="slide bg-selflearn" id="s28">
+  <div class="bar-top"></div><div class="bar-left"></div><div class="bar-right"></div>
+  <div class="content" style="position:relative;z-index:3;">
+    <div class="selflearn-tag a1">Tự Học Tại Nhà · Trang 4/4</div>
+    <div class="a2 slide-title-d" style="margin-bottom:18px;">Tiêu Chí Tự Đánh Giá Bài Của Bạn</div>
+    <div class="flow a3" style="gap:12px;">
+      <div style="background:rgba(255,255,255,0.06);border:1.5px solid rgba(196,164,78,0.2);border-radius:12px;padding:18px 22px;">
+        <div style="font-size:13px;font-weight:900;letter-spacing:2px;text-transform:uppercase;color:#D4B46E;margin-bottom:8px;">Kiểm tra bước Nhắc Lại</div>
+        <div style="font-size:17px;color:rgba(255,255,255,0.82);line-height:1.65;">Đếm số từ trong bài là từ khách đã tự nói. Nếu không có từ nào trong dấu ngoặc kép từ ghi chú, toàn bài là ngôn ngữ người bán. Viết lại từ đầu bằng cách đọc lại ghi chú buổi tư vấn.</div>
+      </div>
+      <div style="background:rgba(255,255,255,0.06);border:1.5px solid rgba(196,164,78,0.2);border-radius:12px;padding:18px 22px;">
+        <div style="font-size:13px;font-weight:900;letter-spacing:2px;text-transform:uppercase;color:#D4B46E;margin-bottom:8px;">Kiểm tra bước Lộ Trình</div>
+        <div style="font-size:17px;color:rgba(255,255,255,0.82);line-height:1.65;">Gạch chân mỗi cột mốc. Hỏi: cột mốc này giải quyết điểm nghẽn nào khách đã kể? Nếu không trả lời được, đó là thông tin sản phẩm, không phải lộ trình.</div>
+      </div>
+      <div style="background:rgba(255,255,255,0.06);border:1.5px solid rgba(196,164,78,0.2);border-radius:12px;padding:18px 22px;">
+        <div style="font-size:13px;font-weight:900;letter-spacing:2px;text-transform:uppercase;color:#D4B46E;margin-bottom:8px;">Kiểm tra câu hỏi đánh giá</div>
+        <div style="font-size:17px;color:rgba(255,255,255,0.82);line-height:1.65;">Đọc câu cuối của bài. Nếu khách im lặng sau đó mà cuộc trò chuyện không tự nhiên tiếp tục, câu đó đang ép quyết định thay vì để khách tự đánh giá.</div>
+      </div>
+    </div>
+    <div class="a4" style="margin-top:14px;padding:12px 20px;background:rgba(196,164,78,0.1);border-radius:8px;text-align:center;">
+      <div style="font-size:16px;color:#D4B46E;font-weight:700;font-style:italic;">"Người bán sản phẩm khiến khách suy nghĩ. Người dẫn con đường khiến khách hành động." · Coach Duy Nguyễn</div>
+    </div>
+  </div>
+  <div class="footer-dark">THE TRUSTED ADVISOR | COACH DUY NGUYEN</div>
+</div>
+
+<!-- NAV -->
+<div class="nav">
+  <span class="nav-counter" id="ctr">1 / 28</span>
+  <button class="nav-btn" onclick="go(-1)">&#8592;</button>
+  <button class="nav-btn" onclick="go(1)">&#8594;</button>
+  <button class="nav-btn" id="fsBtn" onclick="toggleFS()" title="Toàn màn hình">&#x26F6;</button>
+</div>
+
+<script>
+(function(){
+  const cv=document.getElementById('pcv'),cx=cv.getContext('2d');
+  let pts=[];
+  function resize(){cv.width=window.innerWidth;cv.height=window.innerHeight;}
+  resize();window.addEventListener('resize',resize);
+  for(let i=0;i<55;i++)pts.push({x:Math.random()*cv.width,y:Math.random()*cv.height,r:Math.random()*1.8+0.5,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,a:Math.random()*.35+.07,da:(Math.random()-.5)*.008});
+  function draw(){
+    cx.clearRect(0,0,cv.width,cv.height);
+    pts.forEach(p=>{
+      cx.beginPath();cx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      cx.fillStyle=`rgba(196,164,78,${p.a})`;cx.fill();
+      p.x+=p.vx;p.y+=p.vy;p.a+=p.da;
+      if(p.a>.46||p.a<.07)p.da*=-1;
+      if(p.x<-4)p.x=cv.width+4;if(p.x>cv.width+4)p.x=-4;
+      if(p.y<-4)p.y=cv.height+4;if(p.y>cv.height+4)p.y=-4;
+    });
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+const slides=document.querySelectorAll('.slide');
+const N=slides.length;
+let cur=0;
+
+function retrigger(el){
+  el.querySelectorAll('.a1,.a2,.a3,.a4,.a5,.aL,.aR,.aS').forEach(e=>{
+    [...e.classList].filter(c=>/^a[1-5LRS]$/.test(c)).forEach(c=>{
+      e.classList.remove(c);void e.offsetWidth;e.classList.add(c);
+    });
+  });
+  el.querySelectorAll('[style*="animation"]').forEach(e=>{
+    const a=e.style.animation;if(!a||a.includes('infinite'))return;
+    e.style.animation='none';void e.offsetWidth;e.style.animation=a;
+  });
+}
+
+function isMobile(){return window.innerWidth<=768;}
+
+function showSlide(n){
+  if(isMobile())return;
+  slides[cur].style.display='none';
+  cur=(n+N)%N;
+  slides[cur].style.display='flex';
+  document.getElementById('ctr').textContent=(cur+1)+' / '+N;
+  retrigger(slides[cur]);
+}
+function go(d){showSlide(cur+d);}
+
+function applyMode(){
+  if(isMobile()){
+    document.body.style.overflow='auto';
+    document.body.style.height='auto';
+    slides.forEach(s=>{
+      s.style.display='flex';s.style.width='100%';s.style.height='auto';
+      s.style.minHeight='auto';s.style.position='relative';s.style.overflowX='hidden';
+    });
+    document.querySelector('.nav').style.display='none';
+    document.getElementById('pcv').style.display='none';
+  } else {
+    document.body.style.overflow='hidden';
+    document.body.style.height='100vh';
+    slides.forEach((s,i)=>{
+      s.style.display=i===cur?'flex':'none';
+      s.style.width='100vw';s.style.height='100vh';
+      s.style.minHeight='';s.style.position='relative';s.style.overflowX='hidden';
+    });
+    document.querySelector('.nav').style.display='flex';
+    document.getElementById('pcv').style.display='block';
+    document.getElementById('ctr').textContent=(cur+1)+' / '+N;
+  }
+}
+
+function toggleFS(){
+  if(!document.fullscreenElement){
+    document.documentElement.requestFullscreen();
+    document.getElementById('fsBtn').textContent='✕';
+  } else {
+    document.exitFullscreen();
+    document.getElementById('fsBtn').textContent='⛶';
+  }
+}
+document.addEventListener('fullscreenchange',()=>{
+  if(!document.fullscreenElement) document.getElementById('fsBtn').textContent='⛶';
+});
+
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key==='ArrowDown')go(1);
+  if(e.key==='ArrowLeft'||e.key==='ArrowUp')go(-1);
+});
+
+applyMode();
+window.addEventListener('resize',()=>applyMode());
+</script>
+
+<style>
+@media(max-width:768px){
+  body{overflow:auto !important;height:auto !important;}
+  .slide{overflow:visible !important;padding:40px 18px 52px !important;width:100% !important;height:auto !important;min-height:auto !important;}
+  .content{padding:0 !important;max-width:100% !important;}
+  .bar-left,.bar-right,.border-practice{display:none !important;}
+  [style*="font-size:58px"]{font-size:30px !important;line-height:1.12 !important;}
+  [style*="font-size:80px"]{font-size:40px !important;}
+  [style*="font-size:260px"]{display:none !important;}
+  [style*="font-size:52px"]{font-size:28px !important;}
+  [style*="font-size:44px"]{font-size:26px !important;}
+  [style*="font-size:34px"]{font-size:22px !important;}
+  [style*="font-size:32px"]{font-size:20px !important;}
+  .slide-title,.slide-title-d{font-size:18px !important;}
+  .g2,.g3{grid-template-columns:1fr !important;gap:12px !important;}
+  .card,.card-dark{padding:16px !important;}
+  .ct,.ct-d{font-size:16px !important;}
+  .cb,.cb-d{font-size:14px !important;}
+  .frow{padding:11px 13px !important;}
+  .ftxt{font-size:14px !important;}
+  .stxt{font-size:15px !important;}
+  .srow{padding:11px 14px !important;}
+  .trow{padding:13px 15px !important;}
+  .ttxt{font-size:15px !important;}
+  .tnum{font-size:24px !important;min-width:26px !important;}
+  .step-name{font-size:20px !important;}
+  .footer-dark,.footer-light,.footer-parchment{font-size:9px !important;height:40px !important;}
+}
+</style>
+</body>
+</html>
